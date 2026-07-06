@@ -15,11 +15,11 @@ typedef struct s_data{
 	int destination;
 	int dns;
 	int sockfd;
-
+	int compteur_de_sonde;
 }	t_data;
 
 int test_ac(int ac, char **av);
-void free_exit(char *str, t_data *data);
+void free_exit(char *str, t_data *data, int sortie);
 
 
 #endif

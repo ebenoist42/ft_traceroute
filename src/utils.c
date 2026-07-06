@@ -6,7 +6,7 @@
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 12:28:41 by ebenoist          #+#    #+#             */
-/*   Updated: 2026/07/01 14:12:09 by ebenoist         ###   ########.fr       */
+/*   Updated: 2026/07/06 12:04:29 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ int test_ac(int ac, char **av)
 	return(0);
 }
 
-void free_exit(char *str, t_data *data)
+void free_exit(char *str, t_data *data, int sortie)
 {
 	if(str)
 		perror(str);
 	if(data->res)
 		freeaddrinfo(data->res);
+	exit(sortie);
 }
