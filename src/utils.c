@@ -6,7 +6,7 @@
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 12:28:41 by ebenoist          #+#    #+#             */
-/*   Updated: 2026/07/06 12:04:29 by ebenoist         ###   ########.fr       */
+/*   Updated: 2026/07/07 13:44:48 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,9 @@ void free_exit(char *str, t_data *data, int sortie)
 		perror(str);
 	if(data->res)
 		freeaddrinfo(data->res);
+	if(data->icmp_sockfd)
+		close (data->icmp_sockfd);
+	if(data->sockfd)
+		close(data->sockfd);
 	exit(sortie);
 }
