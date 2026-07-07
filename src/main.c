@@ -33,14 +33,14 @@ static struct sockaddr_in *	init_data(t_data *data, int ac, char **av){
 		free_exit("socket udp", data, 1);
 	
 // socket pour reception obligatoirement icmp 
-	data->icmp_sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);   // ← ajout
+	data->icmp_sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
 	if(data->icmp_sockfd < 0)
 		free_exit("socket icmp", data, 1);
 
 // cast de res (sockaddr qui n'expose pas le sin_port)
 	struct sockaddr_in *addr = (struct sockaddr_in *)data->res->ai_addr;
 	
-// 33434 port inutilisable, pour pouvoir recv le msg d'erreur d'arriver a destination.
+// 33434 port inutilisable, pour pouvoir recv le msg d'erreur d'arriver a destination
 	data->compteur_de_sonde = 1;
 	addr->sin_port = htons(33434 + data->compteur_de_sonde);
 	return addr;
