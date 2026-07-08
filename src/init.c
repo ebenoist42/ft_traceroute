@@ -6,7 +6,7 @@
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:48:45 by ebenoist          #+#    #+#             */
-/*   Updated: 2026/07/08 15:11:57 by ebenoist         ###   ########.fr       */
+/*   Updated: 2026/07/08 15:48:21 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int check_m(int ac, char **av,int i, t_data *data)
 {
 	
 	if((i + 1) == ac){
-		printf("Option `-m' (argc 2) requires an argument: `-m max_ttl'\n");
+		printf("Option `-m' (argc %d) requires an argument: `-m max_ttl'\n", i);
 		return(1);}
 	else if(ft_str_is_digit(av[i + 1]) == 0 ){
 		printf("Cannot handle `-m' option with arg `%s' (argc %d)\n", av[i + 1], (i+1));
@@ -27,7 +27,7 @@ static int check_m(int ac, char **av,int i, t_data *data)
 		return(1);}
 	else if(ac == 5)
 	{
-		printf("Extra arg `%s' (position 3, argc 3)\n", av[3]);
+		printf("Cannot handle \"packetlen\" cmdline arg `%s' on position 2 (argc 4)\n", av[3]);
 		return(1);
 	}
 	else if (ac > 5)
@@ -35,37 +35,44 @@ static int check_m(int ac, char **av,int i, t_data *data)
 		printf("Extra arg `%s' (position 3, argc 3)\n", av[3]);
 		return(1);
 	}
-	else
+	else{
 		data->ttl = ft_atoi(av[i + 1]);
-	//printf("TTL = %d\n", data->ttl);
-	//printf("AV[i] = %s\n", av[i]);
+		if(av[i + 2])
+			data->arg = av[i + 2];
+		else
+			data->arg = av[i - 1];
+	}
+	if(data->ttl > 255){
+		printf("max hops cannot be more than 255\n");
+		return(1);}
 	return(0);
 }
 
 static int check_flags(t_data *data, int ac, char **av){
     data->ttl = 30;
+	data->arg = av[1];
     for(int i = 1; i < ac; i++)
 	{
 		if(ft_strcmp(av[i], "-m") == 0)
 		{
-			if(check_m(ac, av, i , data) == 0)
-				return(0);
-			}
+			if(check_m(ac, av, i , data) > 0)
+				return(1);
+		}
 	}
-	return(1);
+	return(0);
 }
 
 struct sockaddr_in *init_data(t_data *data, int ac, char **av)
 {
 	if(check_flags(data, ac, av))
-		free_exit(NULL, data, 1);
+		free_exit(NULL, data, 2);
 	data->arrived = 0;
-
 	// traduction dns, stocker dans la struct res, hints sert a mettre la condition IPV4
 	struct addrinfo hints;
 	ft_memset(&hints, 0, sizeof(hints));
 	hints.ai_family = AF_INET;
-	data->dns = getaddrinfo(av[1], NULL, &hints, &data->res);
+
+	data->dns = getaddrinfo(data->arg, NULL, &hints, &data->res);
 	if (data->dns != 0)
 	{
 		printf("%s: Temporary failure in name resolution\nCannot handle "

@@ -6,7 +6,7 @@
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 12:28:41 by ebenoist          #+#    #+#             */
-/*   Updated: 2026/07/08 15:09:15 by ebenoist         ###   ########.fr       */
+/*   Updated: 2026/07/08 15:54:11 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,12 @@ static void	ft_help(){
 
 int test_ac(int ac, char **av)
 {
-	for(int i = 1; i < ac; i++){
-		if(ft_strcmp(av[i], "--help") == 0){
+	for(int i = 0; i < ac; i++){
+		if(ft_strcmp(av[i], "--help") == 0 || ac == 1){
 			ft_help();
 			exit(0);}
 		else if(ft_strcmp(av[i], "-m") == 0)
 				return(0);}
-
 	return(0);
 }
 

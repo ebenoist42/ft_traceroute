@@ -6,7 +6,7 @@
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 11:12:10 by ebenoist          #+#    #+#             */
-/*   Updated: 2026/07/08 14:25:28 by ebenoist         ###   ########.fr       */
+/*   Updated: 2026/07/08 16:00:20 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ static void send_recv(t_data *data, struct sockaddr_in *addr)
 	printf("\n");
 }
 
-static void ft_traceroute(t_data *data, struct sockaddr_in *addr, char *str)
+static void ft_traceroute(t_data *data, struct sockaddr_in *addr)
 {
 
-	printf("traceroute to %s (%s), 30 hops max, 60 byte packets\n", str, inet_ntoa(addr->sin_addr));
+	printf("traceroute to %s (%s), 30 hops max, 60 byte packets\n", data->arg, inet_ntoa(addr->sin_addr));
 
 	for (int ttl = 1; ttl <= data->ttl ; ttl++)
 	{
@@ -110,6 +110,6 @@ int main(int ac, char **av)
 	t_data data;
 	ft_memset(&data, 0, sizeof(data));
 	struct sockaddr_in *addr = init_data(&data, ac, av);
-	ft_traceroute(&data, addr, av[1]);
+	ft_traceroute(&data, addr);
 	free_exit(NULL, &data, 0);
 }

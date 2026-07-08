@@ -17,6 +17,7 @@ typedef struct s_data{
 	struct addrinfo *res;
 	
 	int ttl;
+	char *arg;
 	int destination;
 	int dns;
 	int icmp_sockfd;
