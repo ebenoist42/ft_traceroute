@@ -6,7 +6,7 @@
 #    By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/30 11:11:41 by ebenoist          #+#    #+#              #
-#    Updated: 2026/07/01 12:29:50 by ebenoist         ###   ########.fr        #
+#    Updated: 2026/07/08 13:49:07 by ebenoist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ CC		= cc -g
 CFLAGS	= -Wall -Werror -Wextra -g
 SRC		= src/main.c\
 		  src/utils.c\
+		  src/libft.c\
+		  src/init.c\
 
 
 			 
