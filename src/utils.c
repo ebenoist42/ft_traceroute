@@ -6,7 +6,7 @@
 /*   By: ebenoist <ebenoist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 12:28:41 by ebenoist          #+#    #+#             */
-/*   Updated: 2026/07/08 15:54:11 by ebenoist         ###   ########.fr       */
+/*   Updated: 2026/07/08 16:31:06 by ebenoist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ int test_ac(int ac, char **av)
 			exit(0);}
 		else if(ft_strcmp(av[i], "-m") == 0)
 				return(0);}
+
+		if(ac == 3){
+			printf("Cannot handle \"packetlen\" cmdline arg `%s' on position 2 (argc 2)\n", av[2]);
+			return(1);}
+		if(ac >= 3){
+			printf("Extra arg `%s' (position 3, argc 3)\n", av[3]);
+			return(1);}
 	return(0);
 }
 
