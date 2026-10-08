@@ -94,6 +94,3 @@ Through this project, the main concepts explored are:
 - DNS and hostname resolution
 - Network latency measurements
 
-## 👩‍💻 Author
-
-Developed as part of the **42 School** curriculum.
